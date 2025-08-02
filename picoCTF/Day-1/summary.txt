@@ -95,3 +95,44 @@ git clone git@github.com:Dev-Awuor/Cysec-rep.git
 
 # 5. Launch VS Code
 code .
+
+📸 Screenshots
+VS Code Sidebar – shows Cysec-rep directory & summary.txt in progress
+
+GitHub Repo View – public repo ready for SSH-based updates
+
+(Add your actual PNGs under ./screenshots/)
+
+🚧 Roadblocks & Resolutions
+Unknown host key prompts → Verified fingerprint, added to known_hosts
+
+Port juggling → Took notes on ports 53159 vs 53166 to avoid mix-ups
+
+Repo URL confusion → Switched from HTTPS to SSH clone once key was in place
+
+🛠️ Lessons Learned
+Familiarity with ssh flags & host-key management builds solid habits
+
+Basic shell nav (ls, cd, pwd) underpins every CTF file-hunt
+
+Immediate history flush (history -a) ensures nothing slips away
+
+Local SSH keypairs → seamless GitHub integration
+
+🔜 Next Steps
+Upload id_ed25519.pub to GitHub → clone via git@github.com:…
+
+Harden ~/.ssh/config for shortcuts & key usage
+
+Explore tmux or screen for persistent sessions
+
+Automate routine scans with simple Bash scripts
+
+📚 References
+OpenSSH Manual (man ssh)
+
+picoCTF Documentation
+
+GitHub SSH Key Setup Guide
+
+— End of Day 1 Cyber-Sec Journey
