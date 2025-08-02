@@ -1,0 +1,97 @@
+# Cyber-Sec Journey – Day 1: SSH Foundations & PicoCTF Warmup
+
+## 🏷️ Session Overview  
+**Date:** 2025-08-02  
+**Tag:** picoCTF SSH Intro + Local SSH Workflow  
+
+## 🎯 Objectives  
+- Gain hands-on with SSH: connect to a picoCTF VM, navigate its filesystem, grab flags  
+- Build a local SSH toolkit: key-pair generation, workspace setup, repo cloning via SSH  
+
+## 🖥️ Environment & Tools  
+- **Local OS:** Windows 10 → WSL2 Ubuntu 20.04, VS Code (Remote-WSL)  
+- **Remote Target:** Ubuntu 18.04.5 LTS @ venus.picoctf.net (ports 53159 & 53166)  
+- **Primary Tools:**  
+  - `ssh`, `ssh-keygen`, `ssh-copy-id`  
+  - Basic shell: `ls`, `cd`, `pwd`, `cat`, `history`  
+  - `git`, VS Code, GitHub repo  
+
+---
+
+## 🔍 Methodology & Logical Flow  
+
+1. **Recon & Research**  
+   - Read `man ssh` and picoCTF docs to find user (`ctf-player`), host (`venus.picoctf.net`) and ports (53159, 53166)  
+   - Prepared local workspace under `~/ssh-study`  
+
+2. **First SSH Engagement**  
+   - Command:  
+     ```bash
+     ssh ctf-player@venus.picoctf.net -p 53159
+     ```  
+   - Accepted unfamiliar ED25519 fingerprint → persisted in `~/.ssh/known_hosts`  
+   - Navigated with  
+     ```bash
+     ls -l; cd ..; pwd
+     ```  
+   - Retrieved **flag 1** (`1of3.flag.txt`) & **flag 3** (`3of3.flag.txt`) from `/home/ctf-player`  
+
+3. **Second SSH Engagement**  
+   - Connected on port 53166:  
+     ```bash
+     ssh ctf-player@venus.picoctf.net -p 53166
+     ```  
+   - Grabbed **flag 2** (`2of3.flag.txt`) from the root directory `/`  
+   - Assembled full flag:  
+     ```text
+     picoCTF{xxsh_0ut_0f_\/\/4t3r_71be5264}
+     ```  
+
+4. **Local SSH Workflow Setup**  
+   - Created study folder and generated a new keypair:  
+     ```bash
+     mkdir ~/ssh-study && cd ~/ssh-study
+     ssh-keygen -t ed25519 -C "lloydawuor.dev@gmail.com"
+     ```  
+   - Displayed public key for GitHub upload:  
+     ```bash
+     cat ~/.ssh/id_ed25519.pub
+     ```  
+
+5. **Repository Cloning & Workspace Bootstrapping**  
+   - Cloned existing repo (HTTP) as placeholder:  
+     ```bash
+     git clone https://github.com/Dev-Awuor/Cysec-rep.git
+     ```  
+   - Opened VS Code in new folder:  
+     ```bash
+     code .
+     ```  
+   - Reviewed recent history to keep track of learned commands:  
+     ```bash
+     history | tail -n 30
+     ```  
+
+---
+
+## 💻 Key Bash Snippets  
+
+```bash
+# 1. SSH into picoCTF host
+ssh ctf-player@venus.picoctf.net -p 53159
+
+# 2. Navigate & read flags
+ls -l
+cat 1of3.flag.txt
+cd /
+cat 2of3.flag.txt
+cat ~/3of3.flag.txt
+
+# 3. Generate SSH keypair locally
+ssh-keygen -t ed25519 -C "lloydawuor.dev@gmail.com"
+
+# 4. Clone your GitHub repo
+git clone git@github.com:Dev-Awuor/Cysec-rep.git
+
+# 5. Launch VS Code
+code .
